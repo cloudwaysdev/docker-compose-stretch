@@ -2,35 +2,41 @@ version: '3'
 
 services:
   webserver:
-    image: 'cloudwaysdev/ansiblexenial'
+    image: 'cloudwaysdev/ansiblestretch'
+    environment:
+      - SSH_AUTH_SOCK="${SSH_AUTH_SOCK}"
     volumes:
-      - './ssh_data/authorized_keys:/root/.ssh/authorized_keys'
+      - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
+    # volumes:
+    #   - './ssh_data/:/root/.ssh/'
     networks:
       xenial_nw:
-        ipv4_address: 172.5.0.2
+        ipv4_address: 172.5.0.22
   appserver:
-    image: 'cloudwaysdev/ansiblexenial'
+    image: 'cloudwaysdev/ansiblestretch'
+    environment:
+      - SSH_AUTH_SOCK="${SSH_AUTH_SOCK}"
     volumes:
-      - './ssh_data/authorized_keys:/root/.ssh/authorized_keys'
+      - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
+    # volumes:
+    #   - './ssh_data/:/root/.ssh/'
     networks:
       xenial_nw:
-        ipv4_address: 172.5.0.3
+        ipv4_address: 172.5.0.23
 
   dbserver:
-    image: 'cloudwaysdev/ansiblexenial'
+    image: 'cloudwaysdev/ansiblestretch'
+    environment:
+      - SSH_AUTH_SOCK="${SSH_AUTH_SOCK}"
     volumes:
-      - './ssh_data/authorized_keys:/root/.ssh/authorized_keys'
+      - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
+    # volumes:
+    #   - './ssh_data/:/root/.ssh/'
     networks:
       xenial_nw:
-        ipv4_address: 172.5.0.4
+        ipv4_address: 172.5.0.24
 
 networks:
   xenial_nw:
     external:
       name: ansible_nw
-
-#volumes:
-#    shared: {}
-
-#volumes:
-#    ssh_key: './ssh_data/authorized_keys'

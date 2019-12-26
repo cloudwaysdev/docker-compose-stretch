@@ -31,6 +31,7 @@ docker-compose up -d
 
 docker login --username=khawarhere
 
+docker build -t cloudwaysdev/ansiblestretch .
 docker build -t cloudwaysdev/ansiblestretch -f ./Dockerfile  .
 
 docker build -t $DOCKER_ACC/$DOCKER_REPO:$IMG_TAG .
@@ -38,3 +39,7 @@ docker build -t cloudwaysdev/ansiblestretch:latest .
 
 docker push $DOCKER_ACC/$DOCKER_REPO:$IMG_TAG
 docker push cloudwaysdev/ansiblestretch:latest
+
+
+### logs
+sudo journalctl -fu docker.service
