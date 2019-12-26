@@ -30,7 +30,7 @@ RUN apt-get update \
 
 RUN mkdir /var/run/sshd
 
-# RUN echo 'root:123' | chpasswd
+RUN echo 'root:Debian.911' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -i 's/StrictModes yes/StrictModes no/' /etc/ssh/sshd_config
 
@@ -40,8 +40,9 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-RUN mkdir /root/.ssh && touch authorized_keys /root/.ssh/
-# Volume Configuration
+RUN mkdir /root/.ssh 
+RUN touch /root/.ssh/authorized_keys
+
 VOLUME ["/root/.ssh"]
 
 EXPOSE 80
